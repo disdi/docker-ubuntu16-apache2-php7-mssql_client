@@ -1,5 +1,4 @@
-FROM docker-registry.spt.com:5000/linux/ubuntu-16_04-nginx-php7
-#francarmona/docker-ubuntu16-apache2-php7
+FROM francarmona/docker-ubuntu16-apache2-php7
 MAINTAINER Francisco Carmona <fcarmona.olmedo@gmail.com>
 
 RUN apt-get update
