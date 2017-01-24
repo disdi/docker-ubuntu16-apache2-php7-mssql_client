@@ -4,13 +4,13 @@ MAINTAINER Francisco Carmona <fcarmona.olmedo@gmail.com>
 RUN apt-get update
 RUN apt-get -y upgrade
 
-
 # MSQL server driver
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
 
 RUN apt-get update
-RUN ACCEPT_EULA=Y DEBIAN_FRONTEND=noninteractive apt-get install -y --yes msodbcsql unixodbc-dev-utf16
+RUN ACCEPT_EULA=Y DEBIAN_FRONTEND=noninteractive apt-get -f install -y --yes msodbcsql
+RUN apt-get install -y --yes unixodbc-dev-utf16
 RUN pecl install sqlsrv pdo_sqlsrv
 
 #RUN echo "extension=/usr/lib/php/20151012/sqlsrv.so" >> /etc/php/7.0/apache2/php.ini
