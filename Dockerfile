@@ -21,7 +21,7 @@ RUN curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > /etc/apt
 
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 RUN ACCEPT_EULA=Y DEBIAN_FRONTEND=noninteractive apt-get install --fix-missing -y --yes php-dev msodbcsql
-RUN ACCEPT_EULA=Y DEBIAN_FRONTEND=noninteractive apt-get -y install unixodbc-dev-utf16
+RUN ACCEPT_EULA=Y DEBIAN_FRONTEND=noninteractive apt-get -y install unixodbc-dev
 RUN pecl install sqlsrv pdo_sqlsrv
 
 RUN echo "extension=/usr/lib/php/20151012/sqlsrv.so" >> /etc/php/7.0/apache2/php.ini
