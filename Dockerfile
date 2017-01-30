@@ -10,6 +10,8 @@ ADD config/apache/apache2.conf /etc/apache2/apache2.conf
 ADD config/apache/ports.conf /etc/apache2/ports.conf
 ADD config/apache/envvars /etc/apache2/envvars
 
+
+
 # Update php.ini
 ADD config/php/php.conf /etc/php/7.0/apache2/php.ini
 
@@ -17,9 +19,9 @@ ADD config/php/php.conf /etc/php/7.0/apache2/php.ini
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
 
-RUN apt-get update
-RUN ACCEPT_EULA=Y DEBIAN_FRONTEND=noninteractive apt-get -f install -y --yes msodbcsql
-RUN apt-get install -y --yes unixodbc-dev-utf16
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
+RUN ACCEPT_EULA=Y DEBIAN_FRONTEND=noninteractive apt-get install --fix-missing -y --yes php-dev msodbcsql
+RUN ACCEPT_EULA=Y DEBIAN_FRONTEND=noninteractive apt-get -y install unixodbc-dev-utf16
 RUN pecl install sqlsrv pdo_sqlsrv
 
 RUN echo "extension=/usr/lib/php/20151012/sqlsrv.so" >> /etc/php/7.0/apache2/php.ini
